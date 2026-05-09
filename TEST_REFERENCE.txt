@@ -1,0 +1,233 @@
+"""
+Playwright Test Suite - Sauce Demo Login Page
+Test Case Reference Guide
+"""
+
+TEST SUMMARY
+============
+Total Test Cases: 30+
+Coverage Areas: 9
+Success Criteria: All tests should pass with valid credentials
+
+────────────────────────────────────────────────────────────────
+
+POSITIVE TEST CASES ✅
+────────────────────────────────────────────────────────────────
+
+□ TC-001: Successful Login
+  Action: Enter standard_user + secret_sauce
+  Expected: Redirect to /inventory page with "Products" title
+
+□ TC-002: Login Button Functionality
+  Action: Verify login button exists and is enabled
+  Expected: Button is visible and clickable
+
+□ TC-003: Page Title & Heading
+  Action: Check page title on load
+  Expected: Title contains "Swag Labs"
+
+────────────────────────────────────────────────────────────────
+
+NEGATIVE TEST CASES - INVALID CREDENTIALS ❌
+────────────────────────────────────────────────────────────────
+
+□ TC-004: Invalid Username
+  Input: invalid_user + secret_sauce
+  Expected: Error message "Username and password do not match"
+
+□ TC-005: Invalid Password
+  Input: standard_user + wrong_password
+  Expected: Error message "Username and password do not match"
+
+□ TC-006: Empty Username
+  Input: (empty) + secret_sauce
+  Expected: Error message "Username is required"
+
+□ TC-007: Empty Password
+  Input: standard_user + (empty)
+  Expected: Error message "Password is required"
+
+□ TC-008: Both Fields Empty
+  Input: (empty) + (empty)
+  Expected: Error message "Username is required"
+
+□ TC-009: Both Fields Invalid
+  Input: invalid + invalid
+  Expected: Error message "Username and password do not match"
+
+────────────────────────────────────────────────────────────────
+
+UI/UX TEST CASES 🎨
+────────────────────────────────────────────────────────────────
+
+□ TC-010: Username Field
+  Test: Visible, enabled, accepts input
+  Expected: All conditions pass
+
+□ TC-011: Password Field
+  Test: Visible, enabled, accepts input
+  Expected: All conditions pass
+
+□ TC-012: Password Field Masking
+  Test: Check input type attribute
+  Expected: type="password"
+
+□ TC-013: Error Message Display
+  Test: Error appears on failure, updates on input
+  Expected: Error shows/hides appropriately
+
+□ TC-014: Logo & Branding
+  Test: Verify Swag Labs logo visible
+  Expected: Logo displayed correctly
+
+□ TC-015: Page URL
+  Test: Check current URL on page load
+  Expected: URL matches base URL
+
+────────────────────────────────────────────────────────────────
+
+EDGE CASES 🔧
+────────────────────────────────────────────────────────────────
+
+□ TC-016: Username with Spaces
+  Input: " standard_user " (with padding)
+  Expected: Login fails (spaces not trimmed)
+
+□ TC-017: SQL Injection Attempt
+  Input: ' OR '1'='1
+  Expected: Login fails, error displayed
+
+□ TC-018: Special Characters
+  Input: test@#$%user123
+  Expected: Input accepted and stored
+
+□ TC-019: Long Password
+  Input: 100+ characters
+  Expected: Input accepted, password field functions
+
+────────────────────────────────────────────────────────────────
+
+ACCESSIBILITY TESTS ♿
+────────────────────────────────────────────────────────────────
+
+□ TC-020: Form Labels
+  Test: Check for label elements
+  Expected: Username and Password labels present
+
+□ TC-021: Keyboard Navigation - Tab
+  Action: Press Tab key through form
+  Expected: Focus moves: username → password → login button
+
+□ TC-022: Keyboard Submit - Enter
+  Action: Fill form, press Enter on password field
+  Expected: Form submits, redirects to inventory
+
+────────────────────────────────────────────────────────────────
+
+PERFORMANCE TESTS ⚡
+────────────────────────────────────────────────────────────────
+
+□ TC-023: Page Load Time
+  Test: Measure time to page ready
+  Expected: < 3 seconds
+
+□ TC-024: Login Response Time
+  Test: Measure submit to redirect
+  Expected: < 5 seconds
+
+────────────────────────────────────────────────────────────────
+
+SECURITY & SESSION TESTS 🔐
+────────────────────────────────────────────────────────────────
+
+□ TC-025: Session Creation
+  Test: Verify session after successful login
+  Expected: User remains logged in on page refresh
+
+□ TC-026: Logout Clears Session
+  Action: Login then logout
+  Expected: Redirected to login page
+
+□ TC-027: Locked Out User
+  Input: locked_out_user + secret_sauce
+  Expected: Error "Epic sadface: Sorry, this user has been locked out"
+
+□ TC-028: Back Button Security
+  Action: After failed login, press browser back
+  Expected: Stays on login page, doesn't bypass
+
+────────────────────────────────────────────────────────────────
+
+ERROR MESSAGE TESTS 📝
+────────────────────────────────────────────────────────────────
+
+□ TC-029: Exact Error Message
+  Test: Verify error message text
+  Expected: Exact match "Username and password do not match"
+
+□ TC-030: Error Message Location
+  Test: Check error position on page
+  Expected: Error appears above login form
+
+────────────────────────────────────────────────────────────────
+
+TEST EXECUTION CHECKLIST
+────────────────────────────────────────────────────────────────
+
+Pre-Test Setup:
+  □ Node.js installed (check: node --version)
+  □ npm installed (check: npm --version)
+  □ Dependencies installed (run: npm install)
+  □ Playwright browsers installed (run: npx playwright install)
+  □ Test file in tests/ folder (tests/login.spec.js)
+
+Running Tests:
+  □ For beginners: npm run test:ui (interactive mode)
+  □ For quick test: npm test (headless)
+  □ For debugging: npm run test:debug
+  □ For reporting: npm run test:report
+
+Expected Results:
+  □ All 30+ tests should PASS
+  □ No errors during execution
+  □ HTML report generates successfully
+  □ Screenshots only on failures
+
+────────────────────────────────────────────────────────────────
+
+VALID TEST CREDENTIALS
+────────────────────────────────────────────────────────────────
+URL:      https://www.saucedemo.com/
+Username: standard_user
+Password: secret_sauce
+
+────────────────────────────────────────────────────────────────
+
+QUICK COMMANDS
+────────────────────────────────────────────────────────────────
+npm install                    - Install dependencies
+npx playwright install         - Install browsers
+npm test                       - Run all tests
+npm run test:ui               - Interactive UI mode
+npm run test:headed           - Watch tests run
+npm run test:debug            - Debug mode
+npm run test:report           - View results
+npm run test:parallel         - Fast parallel execution
+
+────────────────────────────────────────────────────────────────
+
+BROWSERS TESTED
+────────────────────────────────────────────────────────────────
+✓ Chrome (Chromium)
+✓ Firefox
+✓ Safari (Webkit)
+✓ Mobile Chrome
+✓ Mobile Safari
+
+────────────────────────────────────────────────────────────────
+
+STATUS: READY TO TEST ✅
+
+Start here: npm install && npm run test:ui
+
+────────────────────────────────────────────────────────────────

@@ -1,0 +1,76 @@
+# Example GitHub Actions workflow for CI/CD
+# Place this file at: .github/workflows/playwright.yml
+
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    
+    - name: Run Playwright tests
+      run: npm test
+    
+    - name: Upload blob report to GitHub Actions Artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: blob-report-${{ matrix.node-version }}
+        path: blob-report
+        retention-days: 1
+
+  merge-reports:
+    # Merge reports after test runs
+    if: always()
+    needs: [test]
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Download blob reports from GitHub Actions Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: all-blob-reports
+        pattern: blob-report-*
+    
+    - name: Merge reports
+      run: npx playwright merge-reports --reporter html ./all-blob-reports
+    
+    - name: Upload HTML report
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-report-merged
+        path: playwright-report
+        retention-days: 14

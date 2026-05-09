@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Playwright
+.auth/
+test-results/
+blob-report/
+playwright-report/
+/test-results/
+/blob-report/
+/playwright-report/
+
+# OS
+.DS_Store
+Thumbs.db
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+*.iml
+.sublime-project
+.sublime-workspace
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temp files
+tmp/
+temp/
+*.tmp
+
+# Environment
+.env
+.env.test
+.env.production.local
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build
+dist/
+build/
+
+# Cache
+.cache/
+.eslintcache
+
+# Reports
+reports/

@@ -1,0 +1,30 @@
+{
+  "name": "saucedemo-playwright-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive Playwright test suite for Sauce Demo login page",
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "saucedemo"
+  ],
+  "author": "QA Team",
+  "license": "MIT",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome'",
+    "test:parallel": "playwright test --workers=4",
+    "test:serial": "playwright test --workers=1",
+    "codegen": "playwright codegen https://www.saucedemo.com/"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1"
+  }
+}
