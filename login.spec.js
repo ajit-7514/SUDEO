@@ -11,7 +11,7 @@ test.describe('Sauce Demo Login Page Tests', () => {
     await page.goto(BASE_URL);
   });
 
-  // ==================== POSITIVE TEST CASES =========================
+  // ==================== POSITIVE TEST CASES ============================
 
   test('TC-001: Successful login with valid credentials', async ({ page }) => {
     // Arrange
